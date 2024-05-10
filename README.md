@@ -16,6 +16,9 @@ MongoDB & RabbitMQ
 `docker compose -f ./docker-compose.yml up -d`
 `docker compose -f ./docker-compose.yml down`
 
+Go to http://localhost:15672/#/queues to check out the users-queue
+Use https://nosqlbooster.com/downloads to browse MongoDB using connection link: mongodb://root:example@localhost:27017
+
 ## Running the app
 
 ```bash
