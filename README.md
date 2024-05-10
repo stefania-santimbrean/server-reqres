@@ -10,6 +10,11 @@
 $ yarn install
 ```
 
+## Prep
+
+MongoDB & RabbitMQ
+`docker compose -f ./docker-compose.yml up -d`
+
 ## Running the app
 
 ```bash
