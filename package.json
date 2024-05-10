@@ -35,7 +35,6 @@
     "amqp-connection-manager": "^4.1.14",
     "amqplib": "^0.10.4",
     "axios": "^1.6.8",
-    "jest-mock-extended": "^3.0.7",
     "mongoose": "^8.3.4",
     "nodemailer": "^6.9.13",
     "reflect-metadata": "^0.2.0",

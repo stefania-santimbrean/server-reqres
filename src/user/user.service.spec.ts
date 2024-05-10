@@ -3,10 +3,9 @@ import { UserService } from './user.service';
 import { HttpService } from '@nestjs/axios';
 import { getModelToken } from '@nestjs/mongoose';
 import { User } from './schemas/user.schema';
-import { UserTestingMock } from './schemas/user.mock';
-import { ClientProxy } from '@nestjs/microservices';
-import { mock } from 'jest-mock-extended';
+import { MOCK_USER } from './schemas/user.mock';
 import { MailerService } from '@nestjs-modules/mailer';
+import { Model } from 'mongoose';
 
 describe('UserService', () => {
   let service: UserService;
@@ -23,11 +22,18 @@ describe('UserService', () => {
         },
         {
           provide: getModelToken(User.name),
-          useClass: UserTestingMock,
+          useValue: {
+            findOne: jest.fn(),
+            create: jest.fn().mockResolvedValue(MOCK_USER),
+            updateOne: jest.fn(),
+            exists: jest.fn(),
+          },
         },
         {
           provide: 'USER_SERVICE',
-          useValue: mock<ClientProxy>,
+          useValue: {
+            emit: jest.fn(),
+          },
         },
         {
           provide: MailerService,
@@ -43,5 +49,11 @@ describe('UserService', () => {
 
   it('should be defined', () => {
     expect(service).toBeDefined();
+  });
+
+  it('should store user in db, send mail, emit rabbit event', () => {
+    expect(service.create(MOCK_USER)).resolves.toEqual(
+      expect.objectContaining(MOCK_USER),
+    );
   });
 });

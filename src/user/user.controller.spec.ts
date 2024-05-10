@@ -1,17 +1,11 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { UserController } from './user.controller';
 import { UserService } from './user.service';
+import { MOCK_USER } from './schemas/user.mock';
 
 describe('UserController', () => {
   let controller: UserController;
   let service: UserService;
-
-  const createUserDto = {
-    email: 'george.bluth@reqres.in',
-    first_name: 'George',
-    last_name: 'Bluth',
-    avatar: 'https://reqres.in/img/faces/1-image.jpg',
-  };
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -20,8 +14,8 @@ describe('UserController', () => {
         {
           provide: UserService,
           useValue: {
-            create: jest.fn().mockResolvedValue(createUserDto),
-            findOne: jest.fn().mockResolvedValue({ id: 1, ...createUserDto }),
+            create: jest.fn().mockResolvedValue(MOCK_USER),
+            findOne: jest.fn().mockResolvedValue({ id: 1, ...MOCK_USER }),
             findAvatar: jest.fn(),
             removeAvatar: jest.fn(),
           },
@@ -38,11 +32,11 @@ describe('UserController', () => {
   });
 
   it('should create a user', () => {
-    expect(controller.create(createUserDto)).resolves.toEqual(
-      expect.objectContaining(createUserDto),
+    expect(controller.create(MOCK_USER)).resolves.toEqual(
+      expect.objectContaining(MOCK_USER),
     );
     expect(service.create).toHaveBeenCalled();
-    expect(service.create).toHaveBeenCalledWith(createUserDto);
+    expect(service.create).toHaveBeenCalledWith(MOCK_USER);
   });
 
   it('should find one user', () => {

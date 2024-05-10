@@ -17,8 +17,8 @@ export class UserService {
     private mailerService: MailerService,
   ) {}
 
-  create(createUserDto: CreateUserDto) {
-    const createdUser = new this.userModel({
+  async create(createUserDto: CreateUserDto) {
+    const createdUser = await this.userModel.create({
       ...createUserDto,
       id: Math.floor(Math.random() * 1000), // number can be greater, or can increase incrementally
     });
@@ -29,7 +29,7 @@ export class UserService {
       subject: 'Your user was created!',
       text: `Dear ${createdUser.first_name}, your user was successfully created!`,
     });
-    return createdUser.save();
+    return createdUser;
   }
 
   async findOne(id: number): Promise<User> {
@@ -52,14 +52,13 @@ export class UserService {
           responseType: 'arraybuffer',
         }),
       );
-      const createdUser = new this.userModel({
+      const createdUser = await this.userModel.create({
         id: data.data.id,
         first_name: data.data.first_name,
         last_name: data.data.last_name,
         email: data.data.email,
         avatar: Buffer.from(img.data).toString('base64'),
       });
-      createdUser.save();
       return createdUser.avatar;
     }
   }
