@@ -21,8 +21,8 @@ export class UserController {
     return this.userService.findAvatar(+id);
   }
 
-  @Delete(':id')
+  @Delete(':id/avatar')
   remove(@Param('id') id: string) {
-    return this.userService.remove(+id);
+    return this.userService.removeAvatar(+id);
   }
 }

@@ -64,8 +64,8 @@ export class UserService {
     }
   }
 
-  remove(id: number) {
+  removeAvatar(id: number) {
     // what file from the FileSystem storage?
-    return this.userModel.deleteOne({ id });
+    return this.userModel.updateOne({ id }, { avatar: null });
   }
 }
