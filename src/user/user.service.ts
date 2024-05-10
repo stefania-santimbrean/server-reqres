@@ -28,6 +28,31 @@ export class UserService {
     return data.data;
   }
 
+  async findAvatar(id: number) {
+    if (await this.userModel.exists({ id: id })) {
+      const user = await this.userModel.findOne({ id: id });
+      return user.avatar;
+    } else {
+      const { data } = await firstValueFrom(
+        this.httpService.get(`https://reqres.in/api/users/${id}`),
+      );
+      const img = await firstValueFrom(
+        this.httpService.get(data.data.avatar, {
+          responseType: 'arraybuffer',
+        }),
+      );
+      const createdUser = new this.userModel({
+        id: data.data.id,
+        first_name: data.data.first_name,
+        last_name: data.data.last_name,
+        email: data.data.email,
+        avatar: Buffer.from(img.data).toString('base64'),
+      });
+      createdUser.save();
+      return createdUser.avatar;
+    }
+  }
+
   remove(id: number) {
     return `This action removes a #${id} user`;
   }

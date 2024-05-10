@@ -16,6 +16,11 @@ export class UserController {
     return this.userService.findOne(+id);
   }
 
+  @Get(':id/avatar')
+  findAvatar(@Param('id') id: string) {
+    return this.userService.findAvatar(+id);
+  }
+
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.userService.remove(+id);
