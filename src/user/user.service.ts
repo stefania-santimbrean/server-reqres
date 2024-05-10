@@ -29,8 +29,8 @@ export class UserService {
   }
 
   async findAvatar(id: number) {
-    if (await this.userModel.exists({ id: id })) {
-      const user = await this.userModel.findOne({ id: id });
+    if (await this.userModel.exists({ id })) {
+      const user = await this.userModel.findOne({ id });
       return user.avatar;
     } else {
       const { data } = await firstValueFrom(
@@ -54,6 +54,7 @@ export class UserService {
   }
 
   remove(id: number) {
-    return `This action removes a #${id} user`;
+    // what file from the FileSystem storage?
+    return this.userModel.deleteOne({ id });
   }
 }
