@@ -12,8 +12,10 @@ $ yarn install
 
 ## Prep
 
-MongoDB & RabbitMQ
+MongoDB, RabbitMQ & SMTP Mailslurper server
+To start:
 `docker compose -f ./docker-compose.yml up -d`
+To stop:
 `docker compose -f ./docker-compose.yml down`
 
 Go to http://localhost:15672/#/queues to check out the users-queue
