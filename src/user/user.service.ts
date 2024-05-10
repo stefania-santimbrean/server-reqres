@@ -14,7 +14,10 @@ export class UserService {
   ) {}
 
   create(createUserDto: CreateUserDto) {
-    const createdUser = new this.userModel(createUserDto);
+    const createdUser = new this.userModel({
+      ...createUserDto,
+      id: Math.floor(Math.random() * 1000), // number can be greater, or can increase incrementally
+    });
     return createdUser.save();
   }
 
