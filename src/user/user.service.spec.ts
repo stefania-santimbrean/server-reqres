@@ -55,4 +55,6 @@ describe('UserService', () => {
       expect.objectContaining(MOCK_USER),
     );
   });
+
+  // rest of the tests missing because I need to figure out how to mock firstValueFrom
 });
