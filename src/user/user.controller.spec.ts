@@ -44,4 +44,19 @@ describe('UserController', () => {
     expect(service.create).toHaveBeenCalled();
     expect(service.create).toHaveBeenCalledWith(createUserDto);
   });
+
+  it('should find one user', () => {
+    controller.findOne('1');
+    expect(service.findOne).toHaveBeenCalled();
+  });
+
+  it("should find or retrieve one user's avatar", () => {
+    controller.findAvatar('1');
+    expect(service.findAvatar).toHaveBeenCalled();
+  });
+
+  it("should remove one user's avatar", () => {
+    controller.remove('1');
+    expect(service.removeAvatar).toHaveBeenCalled();
+  });
 });
