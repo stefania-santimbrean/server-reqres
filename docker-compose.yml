@@ -41,6 +41,13 @@ services:
       - rabbitmq
     restart: unless-stopped
 
+  mail:
+    image: marcopas/docker-mailslurper
+    ports:
+      - 2500:2500
+      - 8080:8080
+      - 8085:8085
+
 networks:
   rabbitmq:
     driver: bridge

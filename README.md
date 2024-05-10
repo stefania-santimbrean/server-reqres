@@ -18,6 +18,7 @@ MongoDB & RabbitMQ
 
 Go to http://localhost:15672/#/queues to check out the users-queue
 Use https://nosqlbooster.com/downloads to browse MongoDB using connection link: mongodb://root:example@localhost:27017
+Go to http://localhost:8080/ to check out the mail sent
 
 ## Running the app
 

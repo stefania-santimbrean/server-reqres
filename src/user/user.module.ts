@@ -5,6 +5,7 @@ import { HttpModule } from '@nestjs/axios';
 import { MongooseModule } from '@nestjs/mongoose';
 import { User, UserSchema } from './schemas/user.schema';
 import { ClientsModule, Transport } from '@nestjs/microservices';
+import { MailerModule } from '@nestjs-modules/mailer';
 
 @Module({
   imports: [
@@ -20,6 +21,13 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
         },
       },
     ]),
+    MailerModule.forRoot({
+      transport: {
+        host: 'localhost',
+        port: 2500,
+        secure: false,
+      },
+    }),
   ],
   controllers: [UserController],
   providers: [UserService],
