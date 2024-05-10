@@ -5,7 +5,6 @@ import { getModelToken } from '@nestjs/mongoose';
 import { User } from './schemas/user.schema';
 import { MOCK_USER } from './schemas/user.mock';
 import { MailerService } from '@nestjs-modules/mailer';
-import { Model } from 'mongoose';
 
 describe('UserService', () => {
   let service: UserService;
